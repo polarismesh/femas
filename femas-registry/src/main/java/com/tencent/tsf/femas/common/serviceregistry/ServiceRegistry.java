@@ -19,7 +19,7 @@ public interface ServiceRegistry {
     /**
      * Deregister the serviceInstance.
      *
-     * @param serviceInstance
+     * @param serviceInstance the serviceInstance
      */
     void deregister(ServiceInstance serviceInstance);
 

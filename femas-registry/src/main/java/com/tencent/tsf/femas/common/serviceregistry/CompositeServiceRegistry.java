@@ -70,7 +70,7 @@ public class CompositeServiceRegistry implements ServiceRegistry {
      * 由于是非频繁操作，直接synchronized即可
      * remove后可以从该ServiceRegistry移除已注册的节点
      *
-     * @param serviceRegistryId
+     * @param serviceRegistryId 服务id
      * @return 返回被删除的注册中心
      */
     public synchronized ServiceRegistry removeServiceRegistry(String serviceRegistryId) {

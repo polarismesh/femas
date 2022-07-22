@@ -1,6 +1,5 @@
 package com.tencent.tsf.femas.common.serviceregistry;
 
-
 import com.tencent.tsf.femas.common.spi.SpiService;
 import com.tencent.tsf.femas.common.util.StringUtils;
 import java.util.Map;
@@ -21,9 +20,9 @@ public class RegistryService {
     /**
      * 创建新的Registry然后返回
      *
-     * @param type
-     * @param configs
-     * @return
+     * @param type 注册中心的类型
+     * @param configs 配置参数
+     * @return ServiceRegistry的具体实现，根据注册中心的类型决定
      */
     public static synchronized ServiceRegistry createRegistry(String type, Map<String, String> configs) {
         if (REGISTRY_FACTORIES == null) {
@@ -34,14 +33,9 @@ public class RegistryService {
         if (registryFactory == null) {
             throw new IllegalArgumentException("Invalid type " + type + ". RegistryFactory : Type not registered.");
         }
-        ServiceRegistry serviceRegistry = (ServiceRegistry) registryFactory.getServiceRegistry(configs);
+        ServiceRegistry serviceRegistry = registryFactory.getServiceRegistry(configs);
 
-        Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {
-            @Override
-            public void run() {
-                serviceRegistry.close();
-            }
-        }));
+        Runtime.getRuntime().addShutdownHook(new Thread(serviceRegistry::close));
 
         return serviceRegistry;
     }

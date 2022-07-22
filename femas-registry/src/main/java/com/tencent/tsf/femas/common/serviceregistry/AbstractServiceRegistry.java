@@ -13,6 +13,7 @@ import org.slf4j.LoggerFactory;
 public abstract class AbstractServiceRegistry implements ServiceRegistry {
 
     protected final Logger logger = LoggerFactory.getLogger(AbstractServiceRegistry.class);
+
     private final Set<ServiceInstance> registered = Collections.newSetFromMap(new ConcurrentHashMap<>());
 
     @Override
@@ -39,7 +40,7 @@ public abstract class AbstractServiceRegistry implements ServiceRegistry {
     /**
      * 实际注册实例至注册中心的办法
      *
-     * @param serviceInstance
+     * @param serviceInstance 服务实例
      */
     protected abstract void doRegister(ServiceInstance serviceInstance);
 
@@ -70,7 +71,7 @@ public abstract class AbstractServiceRegistry implements ServiceRegistry {
     /**
      * 实际将实例反注册至注册中心的办法
      *
-     * @param serviceInstance
+     * @param serviceInstance 服务实例
      */
     protected abstract void doDeregister(ServiceInstance serviceInstance);
 }
