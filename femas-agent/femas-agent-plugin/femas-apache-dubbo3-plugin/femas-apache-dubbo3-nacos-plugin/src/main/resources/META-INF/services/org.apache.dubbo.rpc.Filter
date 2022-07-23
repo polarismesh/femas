@@ -1,0 +1,2 @@
+agentDubboProviderFilter=com.tencent.tsf.femas.agent.apache.dubbo.nacos.instrument.filter.ApacheDubboProviderAgentFilter
+agentDubboConsumerFilter=com.tencent.tsf.femas.agent.apache.dubbo.nacos.instrument.filter.ApacheDubboConsumerAgentFilter

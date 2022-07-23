@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>femas-agent-plugin</artifactId>
+        <groupId>com.tencent.tsf</groupId>
+        <version>${revision}</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>femas-apache-dubbo3-plugin</artifactId>
+    <packaging>pom</packaging>
+    <modules>
+        <module>femas-apache-dubbo3-nacos-plugin</module>
+        <module>femas-apache-dubbo3-plugin-common</module>
+    </modules>
+
+    <properties>
+        <apache-dubbo.version>3.0.6</apache-dubbo.version>
+        <nacos-client.version>2.0.4</nacos-client.version>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.tencent.tsf</groupId>
+                <artifactId>femas-apache-dubbo3-plugin-common</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.dubbo</groupId>
+                <artifactId>dubbo-registry-nacos</artifactId>
+                <version>${apache-dubbo.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>com.alibaba.nacos</groupId>
+                        <artifactId>nacos-client</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.dubbo</groupId>
+                <artifactId>dubbo-metadata-report-nacos</artifactId>
+                <version>${apache-dubbo.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>com.alibaba.nacos</groupId>
+                        <artifactId>nacos-client</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.dubbo</groupId>
+                <artifactId>dubbo-registry-zookeeper</artifactId>
+                <version>${apache-dubbo.version}</version>
+            </dependency>
+
+
+            <!-- https://mvnrepository.com/artifact/com.alibaba.nacos/nacos-client -->
+            <dependency>
+                <groupId>com.alibaba.nacos</groupId>
+                <artifactId>nacos-client</artifactId>
+                <version>${nacos-client.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+</project>

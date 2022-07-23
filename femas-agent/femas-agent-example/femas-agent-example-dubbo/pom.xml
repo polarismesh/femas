@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+         http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <packaging>pom</packaging>
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <artifactId>femas-agent-example</artifactId>
+        <groupId>com.tencent.tsf</groupId>
+        <version>${revision}</version>
+    </parent>
+
+
+    <artifactId>femas-agent-example-dubbo</artifactId>
+
+    <modules>
+        <module>femas-agent-example-apache-dubbo3-api</module>
+        <module>femas-agent-example-apache-dubbo3-provider</module>
+        <module>femas-agent-example-apache-dubbo3-consumer</module>
+    </modules>
+
+    <properties>
+        <nacos-client.version>2.0.4</nacos-client.version>
+        <apache-dubbo.version>3.0.6</apache-dubbo.version>
+        <spring-boot.version>2.3.6.RELEASE</spring-boot.version>
+    </properties>
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.apache.dubbo</groupId>
+                <artifactId>dubbo-spring-boot-starter</artifactId>
+                <version>${apache-dubbo.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.dubbo</groupId>
+                <artifactId>dubbo-registry-nacos</artifactId>
+                <version>${apache-dubbo.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>com.alibaba.nacos</groupId>
+                        <artifactId>nacos-client</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+
+            <dependency>
+                <groupId>com.tencent.tsf</groupId>
+                <artifactId>femas-agent-example-apache-dubbo3-api</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-web</artifactId>
+                <version>${spring-boot.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+</project>

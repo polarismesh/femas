@@ -1,0 +1,1 @@
+agentRouterFactory=com.tencent.tsf.femas.agent.apache.dubbo.nacos.instrument.router.ApacheDubboAgentRouterFactory

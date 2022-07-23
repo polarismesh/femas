@@ -1,0 +1,37 @@
+#选择agent要加载的plugin，减少premain对启动速度的影响，在这里统一简单标注每个plugin的作用
+#配置逻辑参见InterceptPlugin，非常重要，不要瞎配
+femas:
+  agent:
+    interceptors:
+          #dubbo agent plugin
+      - plugin:
+          className: org.apache.dubbo.registry.integration.InterfaceCompatibleRegistryProtocol
+          methodName: getServiceDiscoveryInvoker
+          interceptorClass: com.tencent.tsf.femas.agent.apache.dubbo.nacos.instrument.AgentDubboRouterChainInterceptor
+
+      - plugin:
+          className: org.apache.dubbo.registry.nacos.NacosRegistry
+          methodName: doRegister
+          interceptorClass: com.tencent.tsf.femas.agent.apache.dubbo.nacos.instrument.NacosRegistryInterceptor
+      - plugin:
+          className: org.apache.dubbo.registry.nacos.NacosServiceDiscovery
+          methodName: doRegister
+          interceptorClass: com.tencent.tsf.femas.agent.apache.dubbo.nacos.instrument.NacosServiceDisocveryInterceptor
+
+      - plugin:
+          className: org.apache.dubbo.registry.zookeeper.ZookeeperRegistry
+          methodName: doRegister
+          interceptorClass: com.tencent.tsf.femas.agent.apache.dubbo.zookeeper.instrument.ZookeeperRegistryInterceptor
+
+      - plugin:
+          className: com.alibaba.nacos.client.naming.utils.InitUtils
+          methodName: initNamespaceForNaming
+          methodType: static
+          interceptorClass: com.tencent.tsf.femas.agent.apache.dubbo.nacos.instrument.NacosNameSpaceInitUtilsInterceptor
+
+      - plugin:
+          className: org.apache.dubbo.rpc.cluster.filter.DefaultFilterChainBuilder
+          methodName: buildInvokerChain
+          interceptorClass: com.tencent.tsf.femas.agent.apache.dubbo.nacos.instrument.FilterChainBuilderInterceptor
+
+
